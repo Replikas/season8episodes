@@ -36,6 +36,8 @@ body {
     padding: 2rem 0;
     margin-bottom: 2rem;
     animation: slideDown 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
 }
 
 @keyframes slideDown {
@@ -52,6 +54,73 @@ body {
 .header-content {
     text-align: center;
     padding: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Portal Animation */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, 
+        rgba(0, 255, 136, 0.1) 0%, 
+        rgba(0, 204, 255, 0.1) 30%, 
+        rgba(136, 0, 255, 0.1) 60%, 
+        transparent 80%);
+    border-radius: 50%;
+    animation: portalSpin 8s linear infinite;
+    z-index: 1;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 50%;
+    border-top: 2px solid rgba(0, 204, 255, 0.6);
+    border-right: 2px solid rgba(136, 0, 255, 0.6);
+    animation: portalRing 4s linear infinite reverse;
+    z-index: 1;
+}
+
+@keyframes portalSpin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+        opacity: 0.3;
+    }
+}
+
+@keyframes portalRing {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        border-width: 2px;
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg);
+        border-width: 4px;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+        border-width: 2px;
+    }
 }
 
 .header h1 {
