@@ -98,35 +98,35 @@ async function insertDefaultEpisodes() {
             air_date: "2025-06-22"
         },
         {
-            title: "Rickfending Your Mort",
+            title: "The Curicksous Case of Bethjamin Button",
             description: "Morty gets audited. Rick helps him.",
             season: 8,
             episode: 6,
             air_date: "2025-06-29"
         },
         {
-            title: "Wet Kuat Amortican Summer",
+            title: "Ricker Than Fiction",
             description: "The Smiths dine at their favorite Chinese restaurant and are met with a familiar face.",
             season: 8,
             episode: 7,
             air_date: "2025-07-06"
         },
         {
-            title: "Rise of the Numbericons: The Movie",
+            title: "Nomortland",
             description: "Rick and Morty find themselves confused in a confusing place.",
             season: 8,
             episode: 8,
             air_date: "2025-07-13"
         },
         {
-            title: "Mort: Ragnarick",
+            title: "Morty Daddy",
             description: "Morty gets a dragon. Rick gets annoyed.",
             season: 8,
             episode: 9,
             air_date: "2025-07-20"
         },
         {
-            title: "Fear No Mort",
+            title: "Hot Rick",
             description: "The season finale. Rick and Morty face their biggest challenge yet.",
             season: 8,
             episode: 10,
