@@ -1,102 +1,43 @@
-// Rick & Morty Season 8 Episodes Data
-let episodes = [
-    {
-        id: 1,
-        title: "Summer of All Fears",
-        description: "To punish Morty and Summer, Rick puts them in a simulation.",
-        season: 8,
-        episode: 1,
-        airDate: "2025-05-25",
-        links: [
-            {
-                url: "https://drive.google.com/file/d/example1",
-                quality: "1080p",
-                source: "google drive"
-            }
-        ]
-    },
-    {
-        id: 2,
-        title: "Valkyrick",
-        description: "Space Beth calls her dad for a ride, broh.",
-        season: 8,
-        episode: 2,
-        airDate: "2025-06-01",
-        links: []
-    },
-    {
-        id: 3,
-        title: "The Rick, The Mort & The Ugly",
-        description: "Some guys wanna rebuild the citadel, broh. Seems like a bad idea, broh. Yeehaw stuff, broh.",
-        season: 8,
-        episode: 3,
-        airDate: "2025-06-08",
-        links: []
-    },
-    {
-        id: 4,
-        title: "The Last Temptation of Jerry",
-        description: "Broh is risen. The Smiths learn the true meaning of Easter. Kind of. Broh.",
-        season: 8,
-        episode: 4,
-        airDate: "2025-06-15",
-        links: []
-    },
-    {
-        id: 5,
-        title: "Cryo Mort a Rickver",
-        description: "Rick and Morty wanna rob a ship in cryosleep, but people are light sleepers.",
-        season: 8,
-        episode: 5,
-        airDate: "2025-06-22",
-        links: []
-    },
-    {
-        id: 6,
-        title: "The Curicksous Case of Bethjamin Button",
-        description: "Rick and Morty meet a time-traveling baby.",
-        season: 8,
-        episode: 6,
-        airDate: "2025-06-29",
-        links: []
-    },
-    {
-        id: 7,
-        title: "Ricker than Fiction",
-        description: "Rick becomes a fictional character.",
-        season: 8,
-        episode: 7,
-        airDate: "2025-07-06",
-        links: []
-    },
-    {
-        id: 8,
-        title: "Nomortland",
-        description: "Morty gets lost in a wasteland.",
-        season: 8,
-        episode: 8,
-        airDate: "2025-07-13",
-        links: []
-    },
-    {
-        id: 9,
-        title: "Morty Daddy",
-        description: "Jerry tries to be a better father.",
-        season: 8,
-        episode: 9,
-        airDate: "2025-07-20",
-        links: []
-    },
-    {
-        id: 10,
-        title: "Hot Rick",
-        description: "Rick deals with climate change.",
-        season: 8,
-        episode: 10,
-        airDate: "2025-07-27",
-        links: []
+// Episode data - will be loaded from database
+let episodes = [];
+
+// API base URL
+const API_BASE_URL = window.location.origin;
+
+// Load episodes from database
+async function loadEpisodes() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/episodes`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch episodes');
+        }
+        episodes = await response.json();
+        renderEpisodes();
+        populateEpisodeSelect();
+        updateStats();
+    } catch (error) {
+        console.error('Error loading episodes:', error);
+        showNotification('Error loading episodes from database', 'error');
     }
-];
+}
+
+// Load statistics from database
+async function loadStats() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/stats`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch stats');
+        }
+        const stats = await response.json();
+        
+        // Update stats display
+        document.querySelector('.stat-item:nth-child(1) .stat-number').textContent = stats.total_episodes;
+        document.querySelector('.stat-item:nth-child(2) .stat-number').textContent = stats.episodes_with_links;
+        document.querySelector('.stat-item:nth-child(3) .stat-number').textContent = stats.total_links;
+    } catch (error) {
+        console.error('Error loading stats:', error);
+    }
+}
 
 // DOM Elements
 const episodesGrid = document.getElementById('episodesGrid');
@@ -107,11 +48,9 @@ const totalEpisodesSpan = document.getElementById('totalEpisodes');
 const availableLinksSpan = document.getElementById('availableLinks');
 
 // Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
-    renderEpisodes();
-    populateEpisodeSelect();
-    updateStats();
+document.addEventListener('DOMContentLoaded', async function() {
     setupEventListeners();
+    await loadEpisodes(); // This will also call renderEpisodes, populateEpisodeSelect, and updateStats
 });
 
 // Render episodes to the grid
@@ -193,12 +132,9 @@ function populateEpisodeSelect() {
     });
 }
 
-// Update statistics
+// Update statistics (now loads from database)
 function updateStats() {
-    const totalLinks = episodes.reduce((sum, episode) => sum + episode.links.length, 0);
-    
-    totalEpisodesSpan.textContent = episodes.length;
-    availableLinksSpan.textContent = totalLinks;
+    loadStats();
 }
 
 // Setup event listeners
@@ -222,7 +158,7 @@ function setupEventListeners() {
 }
 
 // Handle upload form submission
-function handleUploadSubmission(event) {
+async function handleUploadSubmission(event) {
     event.preventDefault();
     
     const episodeId = parseInt(episodeSelect.value);
@@ -230,20 +166,28 @@ function handleUploadSubmission(event) {
     const linkQuality = document.getElementById('linkQuality').value;
     const linkSource = document.getElementById('linkSource').value;
     
-    // Find the episode and add the link
-    const episode = episodes.find(ep => ep.id === episodeId);
-    if (episode) {
-        const newLink = {
-            url: linkUrl,
-            quality: linkQuality,
-            source: linkSource
-        };
+    try {
+        // Send link data to API
+        const response = await fetch(`${API_BASE_URL}/api/episodes/${episodeId}/links`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                url: linkUrl,
+                quality: linkQuality,
+                source: linkSource
+            })
+        });
         
-        episode.links.push(newLink);
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to add link');
+        }
         
-        // Re-render episodes and update stats
-        renderEpisodes();
-        updateStats();
+        // Reload episodes and stats from database
+        await loadEpisodes();
+        await loadStats();
         
         // Close modal and reset form
         closeUploadModal();
@@ -251,6 +195,9 @@ function handleUploadSubmission(event) {
         
         // Show success message
         showNotification('Link added successfully!', 'success');
+    } catch (error) {
+        console.error('Error adding link:', error);
+        showNotification(`Error: ${error.message}`, 'error');
     }
 }
 
