@@ -141,14 +141,7 @@ async function insertDefaultEpisodes() {
         );
     }
 
-    // Add a sample link for the first episode
-    const firstEpisode = await pool.query('SELECT id FROM episodes WHERE episode = 1 AND season = 8');
-    if (firstEpisode.rows.length > 0) {
-        await pool.query(
-            'INSERT INTO episode_links (episode_id, url, quality, source) VALUES ($1, $2, $3, $4)',
-            [firstEpisode.rows[0].id, 'https://drive.google.com/file/d/example1', '1080p', 'google drive']
-        );
-    }
+    // Sample link removed - episodes start with no links
 }
 
 // API Routes
