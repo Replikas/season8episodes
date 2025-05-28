@@ -62,70 +62,70 @@ async function insertDefaultEpisodes() {
     const defaultEpisodes = [
         {
             title: "Summer of All Fears",
-            description: "Rick punishes Morty and Summer by trapping them in a simulation. Classic overkill, you know how I roll.",
+            description: "To punish Morty and Summer, Rick puts them in a simulation.",
             season: 8,
             episode: 1,
             air_date: "2025-05-25"
         },
         {
             title: "Valkyrick",
-            description: "Space Beth needs a ride and calls her dad. Family drama in space, because why the hell not?",
+            description: "Space Beth calls her dad for a ride, broh.",
             season: 8,
             episode: 2,
             air_date: "2025-06-01"
         },
         {
             title: "The Rick, The Mort & The Ugly",
-            description: "Some idiots try to rebuild the Citadel. Seriously? It's a terrible idea. There's a whole cowboy thing, too. Yeehaw, broh.",
+            description: "Some guys wanna rebuild the citadel, broh. Seems like a bad idea, broh. Yeehaw stuff, broh.",
             season: 8,
             episode: 3,
             air_date: "2025-06-08"
         },
         {
             title: "The Last Temptation of Jerry",
-            description: "Jerry gets a messiah complex. The Smiths try to figure out the true meaning of Easter—fail spectacularly.",
+            description: "Broh is risen. The Smiths learn the true meaning of Easter. Kind of. Broh.",
             season: 8,
             episode: 4,
             air_date: "2025-06-15"
         },
         {
             title: "Cryo Mort a Rickver",
-            description: "Rick and Morty go for a heist on a ship full of people in cryosleep. Except these people aren't as asleep as they should be.",
+            description: "Rick and Morty wanna rob a ship in cryosleep, but people are light sleepers.",
             season: 8,
             episode: 5,
             air_date: "2025-06-22"
         },
         {
             title: "The Curicksous Case of Bethjamin Button",
-            description: "Rick drags everyone to his favorite theme park. Beth and Space Beth stay home and, uh, regress in every sense of the word.",
+            description: "The brohs goes to a theme park Rick loves. Beth and Space Beth stay behind and regress or something.",
             season: 8,
             episode: 6,
             air_date: "2025-06-29"
         },
         {
             title: "Ricker Than Fiction",
-            description: "Rick and Morty try writing the next installment of their favorite movie franchise. Absolutely nothing goes according to plan.",
+            description: "Rick and Morty write the next installment of their favorite movie franchise.",
             season: 8,
             episode: 7,
             air_date: "2025-07-06"
         },
         {
             title: "Nomortland",
-            description: "Jerry finally makes a friend as useless as he is. It's a magical, meaningless mess.",
+            description: "Jerry makes a friend just as jobless as he is.",
             season: 8,
             episode: 8,
             air_date: "2025-07-13"
         },
         {
             title: "Morty Daddy",
-            description: "Summer and Rick go out to eat, while Morty reconnects with someone from his past. Nostalgia and awkwardness, coming right up.",
+            description: "Summer and Rick dine out. Morty reconnects with someone from his past.",
             season: 8,
             episode: 9,
             air_date: "2025-07-20"
         },
         {
             title: "Hot Rick",
-            description: "Sometimes you just gotta do weird shit to get over your past. Rick's an expert in that department.",
+            description: "Sometimes we try weird stuff to let go of the past.",
             season: 8,
             episode: 10,
             air_date: "2025-07-27"
