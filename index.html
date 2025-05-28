@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick & Morty Season 8 - Streaming Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Rick & Morty Season 8</h1>
+                <p>Stream the latest episodes</p>
+            </div>
+        </header>
+
+        <!-- Upload Notice -->
+        <div class="upload-notice">
+            <p>📺 New episodes added weekly! Submit your streaming links below.</p>
+        </div>
+
+        <!-- Episode Library -->
+        <div class="episode-library">
+            <h2>Episodes</h2>
+            <div class="episodes-grid" id="episodesGrid">
+                <!-- Episodes will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number" id="totalEpisodes">10</span>
+                <span class="stat-label">Total Episodes</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="availableLinks">1</span>
+                <span class="stat-label">Available Links</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2025</span>
+                <span class="stat-label">Season Year</span>
+            </div>
+        </div>
+
+        <!-- Upload Modal -->
+        <div id="uploadModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeUploadModal()">&times;</span>
+                <h3>Add Episode Link</h3>
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="episodeSelect">Episode:</label>
+                        <select id="episodeSelect" required>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkUrl">Streaming URL:</label>
+                        <input type="url" id="linkUrl" placeholder="https://example.com/episode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkQuality">Quality:</label>
+                        <select id="linkQuality" required>
+                            <option value="720p">720p</option>
+                            <option value="1080p">1080p</option>
+                            <option value="4K">4K</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkSource">Source:</label>
+                        <input type="text" id="linkSource" placeholder="e.g., Google Drive, Mega" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Upload Link</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Episode Button -->
+        <button class="add-btn" onclick="openUploadModal()" title="Add Episode Link">
+            +
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
