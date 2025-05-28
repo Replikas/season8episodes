@@ -33,7 +33,7 @@ async function loadStats() {
         // Update stats display
         document.querySelector('.stat-item:nth-child(1) .stat-number').textContent = stats.total_episodes;
         document.querySelector('.stat-item:nth-child(2) .stat-number').textContent = stats.episodes_with_links;
-        document.querySelector('.stat-item:nth-child(3) .stat-number').textContent = stats.total_links;
+        // Skip nth-child(3) as it's the Season Year (2025) - don't overwrite it with total_links
     } catch (error) {
         console.error('Error loading stats:', error);
     }
