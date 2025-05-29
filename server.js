@@ -47,9 +47,14 @@ async function initializeDatabase() {
             )
         `);
 
-        // Clear and insert default episodes
-        await pool.query('DELETE FROM episodes');
-        await insertDefaultEpisodes();
+        // Only insert default episodes if table is empty
+        const { rows } = await pool.query('SELECT COUNT(*) FROM episodes');
+        if (parseInt(rows[0].count) === 0) {
+            await insertDefaultEpisodes();
+            console.log('Default episodes inserted');
+        } else {
+            console.log('Episodes already exist, skipping default data insertion');
+        }
 
         console.log('Database initialized successfully');
     } catch (error) {
