@@ -165,7 +165,13 @@ async function handleUploadSubmission(event) {
     const linkUrl = document.getElementById('linkUrl').value;
     const linkQuality = document.getElementById('linkQuality').value;
     const linkSource = document.getElementById('linkSource').value;
-    
+
+    // Prompt for password
+    const password = prompt('Enter admin password to add a link:');
+    if (!password) {
+        showNotification('Password is required to add a link.', 'error');
+        return;
+    }
     try {
         // Send link data to API
         const response = await fetch(`${API_BASE_URL}/api/episodes/${episodeId}/links`, {
@@ -176,7 +182,8 @@ async function handleUploadSubmission(event) {
             body: JSON.stringify({
                 url: linkUrl,
                 quality: linkQuality,
-                source: linkSource
+                source: linkSource,
+                password // include password in request
             })
         });
         
