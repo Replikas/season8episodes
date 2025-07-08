@@ -189,7 +189,13 @@ app.get('/api/episodes', async (req, res) => {
 app.post('/api/episodes/:id/links', async (req, res) => {
     try {
         const episodeId = parseInt(req.params.id);
-        const { url, quality, source } = req.body;
+        const { url, quality, source, password } = req.body;
+
+        // Password protection
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+        if (!ADMIN_PASSWORD || !password || password !== ADMIN_PASSWORD) {
+            return res.status(403).json({ error: 'Forbidden: Invalid password' });
+        }
 
         if (!url || !quality || !source) {
             return res.status(400).json({ error: 'Missing required fields: url, quality, source' });
