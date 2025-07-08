@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 // Database connection
 const pool = new Pool({
-    connectionString: 'postgresql://s8new_owner:npg_zU4NORM6uFrQ@ep-spring-bird-a8c46gy3-pooler.eastus2.azure.neon.tech/s8new?sslmode=require',
+    connectionString: 'postgresql://neondb_owner:npg_VD0GOtn6orLs@ep-patient-snow-a853to1x-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require',
     ssl: {
         rejectUnauthorized: false
     }
